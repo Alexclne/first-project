@@ -5,8 +5,11 @@ from django.db import models
 class Note(models.Model):
     nome = models.CharField(max_length=40)
     description = models.CharField(max_length=2000)
+    created_at = models.DateTimeField(auto_now_add= True)
 
     #In questo modo avremo una rappresentazione esplicita sul Django Administration
     #Ci verrà ritornato il nome effettivo della nota scritta come titolo
     def __str__(self):
         return self.nome
+    
+
