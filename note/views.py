@@ -31,15 +31,16 @@ def createNoteView(request):
 #Si crea un Nuovo NoteForm con tutti i dati POST
 
 def updateNoteView(request , f_id):
-    obj = Note.objects.get (id=f_id) 
-    form = NoteForm (instance=obj)
+    obj = get_object_or_404(Note, id=f_id)
 
     if request.method == "POST":
         form = NoteForm(request.POST , instance=obj)
         if form.is_valid():
             form.save()
             return redirect("note") 
-        return render(request , 'note/update.html', {"form":form})
+    else:
+        form = NoteForm(instance=obj)
+    return render(request ,'note/update.html', {"form":form})
 
 
 

@@ -14,7 +14,8 @@
       <a class="nav-link active" aria-current="page" href="{% url 'create_note'%}">Aggiungi Una Nuova Nota!</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Aggiungi Note</a>
+   
+      <a class="nav-link" href="">vuoto</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#">Rimuovi Note</a>
@@ -35,7 +36,7 @@
           <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
           <p class="card-text">{{nota.description}}</p>
           <a class="card-text">{{nota.created_at}}</a>
-          <a href="#" class="card-link ">Another link</a>
+          <a href="{% url 'update_note' nota.id %}" class="card-link ">Aggiorna la nota</a>
           
         </div>
       </div>
