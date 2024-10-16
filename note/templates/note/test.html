@@ -11,7 +11,7 @@
   
   <ul class="nav nav-pills nav-fill">
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="{% url 'create_note'%}">Aggiungi Una Nuova Nota!</a>
+      <a class="nav-link active bg-success " aria-current="page" href="{% url 'create_note'%}">Aggiungi Una Nuova Nota!</a>
     </li>
     <li class="nav-item">
    
@@ -25,24 +25,31 @@
   <!-- FINE NAVBAR -->
   
   
-  
-  {% for nota in note %}
-  <div class="container-fluid mt-5 ">
-    <div class="col-sm">
-      
-      <div class="card " style="width:18rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{nota.nome}}</h5>
-          <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-          <p class="card-text">{{nota.description}}</p>
-          <a class="card-text">{{nota.created_at}}</a>
-          <a href="{% url 'update_note' nota.id %}" class="card-link ">Aggiorna la nota</a>
-          
+  <div class="container-fluid mt-5">
+    <div class="row">
+      {% for nota in note %}
+        <div class="col-md-3 mb-4"> <!-- Three columns in a row -->
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{nota.nome}}</h5>
+              <p class="card-text">{{nota.description}}</p>
+              <a class="card-text text-black">{{nota.created_at}}</a><br>
+              <a href="{% url 'update_note' nota.id %}" class="card-link text-success">Aggiorna la nota</a>
+              <a href="{% url 'remove_note' nota.id %}" class="card-link text-danger">Elimina la nota</a>
+            </div>
+          </div>
         </div>
-      </div>
+        {% if forloop.counter|divisibleby:4 %}
+        <!-- #forloop.counter è formito da django, conta il numero di iterazioni che stiamo eseguendo.Il count parte da 1
+        #divisibleby, sempre fornito da django controlla fino a che le colonne sono divisibili per il numero che abbiamo indicato.
+                      quando la condizione non è più vera termina il loop andando a capo -->
+          </div>
+          <div class="row"> 
+        {% endif %}
+      {% endfor %}
     </div>
   </div>
-  {%endfor%}
+  
   
   
   

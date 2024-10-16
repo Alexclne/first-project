@@ -16,25 +16,26 @@ def note(request):
     return render(request, 'note/test.html' , {"note" : note})  
 
 
-#INIZIO CREAZIONE CRUD : CREATE
+#CREATE
 def createNoteView(request):
     
-    if request.method == "POST":
-        form = NoteForm(request.POST)
+    if request.method == "POST":#Se l'utente ha iniviato il modolo(se esegue una richiesta di tipo post)
+        form = NoteForm(request.POST)#Si crea un Nuovo NoteForm con tutti i dati POST
         if form.is_valid():#Il metodo is_valid ci aiuta a controllare che tutti i dati definiti nel form, presi dal modello Note sono validi
             form.save()#Nel caso suddetti dati fossero veri vengono salvati nel db
             return redirect("note") #vado a reindirizzare tutto alla vista note. Dopo ver inserito e salvato i dati verrò reindirizzato alla pagina principale note. Si utilizza questa pratica per far si che non vengano spediti da parte dell'utente più volte gli stessi dati (vedi urls.py)
     else:
         form = NoteForm()
     return render(request, "note/form.html", {"form": form})
-#Se l'utente ha iniviato il modolo(se esegue una richiesta di tipo post)
-#Si crea un Nuovo NoteForm con tutti i dati POST
 
+#UPDATE
 def updateNoteView(request , f_id):
     obj = get_object_or_404(Note, id=f_id)
-
+    #Il metodo get_object_or_404 concede di restituire l'oggetto richiesto solo e solamente se esiste. Nel caso l'oggetto non esistesse si genera un errore 404
     if request.method == "POST":
         form = NoteForm(request.POST , instance=obj)
+        #All'interno del request.POST si contengono i nuovi dati
+        #instance=obj è un argomento che  inica qual'è l'oggetto che si dovrà aggiornare con i nuovi dati.Senza ciò si andrebbe a fare la stessa cosa del metodo Create, andremo a creare un nuovo oggetto
         if form.is_valid():
             form.save()
             return redirect("note") 
@@ -43,10 +44,11 @@ def updateNoteView(request , f_id):
     return render(request ,'note/update.html', {"form":form})
 
 
-
+#DELETE
 def removeNoteView(request , f_id):
     obj = Note.objects.get(id=f_id)
     if request.method == "POST":
         obj.delete()
         return redirect("note")
+        
     return render(request, 'note/delete.html', {"obj":obj})

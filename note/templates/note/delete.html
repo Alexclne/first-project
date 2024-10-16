@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Eliminazione Nota</title>
+</head>
+<body>
+    <h1>Elimina nota</h1>
+    <form method="post">
+        {% csrf_token %}
+        <!-- {{obj.as_table }}  Renderizza il form -->
+        <button type="submit">Elimina Nota</button>
+    </form>
+</body>
+</html>
