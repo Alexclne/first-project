@@ -1,0 +1,9 @@
+
+
+
+    <h1>Accedi con il tuo account</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Renderizza il form -->
+        <button type="submit">Salva utente</button>
+    </form>

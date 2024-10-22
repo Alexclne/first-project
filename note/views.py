@@ -4,7 +4,9 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 from .models import Note #Dal modulo models.py importo il modello Note
 from .forms import NoteForm
 from django.contrib.auth.forms import UserCreationForm
-
+from django.contrib.auth import logout
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 
@@ -62,6 +64,15 @@ def registration(request):
             return redirect('note')
     else:
         user=UserCreationForm()
-    return render(request , "auth/registration.html" , {"user":user})
-#PROSEGUIRE DA QUI.
+    return render(request , "registration/registration.html" , {"user":user})
 
+
+def  new_logout(request):
+    if request.method == 'POST':
+        logout(request) #se la richiesta è post esegue il logout dell'user 
+        return HttpResponseRedirect(reverse('note'))  # Reindirizza a una pagina dopo il logout
+    else:
+    
+        return HttpResponseRedirect(reverse('note'))
+    
+#PRSEGUIRE DA QUI!
