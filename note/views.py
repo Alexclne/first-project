@@ -67,12 +67,13 @@ def registration(request):
     return render(request , "registration/registration.html" , {"user":user})
 
 
-def  new_logout(request):
-    if request.method == 'POST':
-        logout(request) #se la richiesta è post esegue il logout dell'user 
-        return HttpResponseRedirect(reverse('note'))  # Reindirizza a una pagina dopo il logout
-    else:
+def new_logout(request):
+    print(f"Metodo della richiesta: {request.method}")
+    print(f"Contenuto POST: {request.POST}")
     
+    if request.method == 'POST':
+        logout(request)
+        return HttpResponseRedirect(reverse('note'))
+    else:
         return HttpResponseRedirect(reverse('note'))
     
-#PRSEGUIRE DA QUI!
