@@ -17,53 +17,66 @@
           <a class="nav-link active bg-success " aria-current="page" href="{% url 'create_note' %}">Aggiungi Una Nuova Nota!</a>
         </li> -->
         <li class="nav-item">
-        <!-- Adesso andrò a gestire le varie condizioni del tipo : se l'utente è autenticato mostrami solo il logout, altrimenti mostrarmi il bottone per registrarmi o accedere -->
-          {% if user.is_authenitcated %}
+
+          <!-- Adesso andrò a gestire le varie condizioni del tipo : se l'utente è autenticato mostrami solo il logout, altrimenti mostrarmi il bottone per registrarmi o accedere -->
+          {% if user.is_authenticated %}
           
-          <li class="nav-item">
+          <!-- Bottone per il logout -->
+          <li class="nav-item justify-content-center">
             <form method="post" action="{% url 'logout' %}" style="display: inline;">
               {% csrf_token %}
               <button type="submit" class="nav-link active bg-success mx-5" aria-current="page">LOGOUT!</button>
-              
-              {% else %}
-              
-              <a class="nav-link active bg-success mx-5 " aria-current="page" href="{% url 'registration' %}">REGISTRATI!</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active bg-success mx-5 " aria-current="page" href="{% url 'login' %}">  ACCEDI! </a>
-            </li>
-            
-            {% endif %}
-            
-            
-          </form>
+            </form>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link active bg-success mx-5" aria-current="page" href="{% url 'create_note' %}">CREA UNA NUOVA NOTA</a>
+          </li>
+
+          <!-- Link alle note dell'utente -->
+          <li class="nav-item">
+            <a class="nav-link active bg-success mx-5" aria-current="page" href="{% url 'note_list' %}">LE TUE NOTE</a>
+          </li>
+          
+          {% else %}
+          
+          <a class="nav-link active bg-success mx-5 " aria-current="page" href="{% url 'registration' %}">REGISTRATI!</a>
         </li>
-        <p><strong>Benvenuto, {% if user.is_authenticated %} {{ user.username }} {% else %} utente {% endif %}</strong></p>
-        <!-- Usando il logout fornito da django devo gestire la richiesta post anche nel file html, altrimenti non prenderà con sè i dati e manderà la richiesta in get oppure un dict vuoto  -->
-      </ul>
-    </div>
-  </nav>
-  
-  <!-- FINE NAVBAR -->
-  
-  {% block content%}
-  
-  {% endblock %}
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <li class="nav-item">
+          <a class="nav-link active bg-success mx-5 " aria-current="page" href="{% url 'login' %}">  ACCEDI! </a>
+        </li>
+        
+        {% endif %}
+        
+        
+      </form>
+    </li>
+    <p><strong>Benvenuto, {% if user.is_authenticated %} {{ user.username }} {% else %} utente {% endif %}</strong></p>
+    <!-- Usando il logout fornito da django devo gestire la richiesta post anche nel file html, altrimenti non prenderà con sè i dati e manderà la richiesta in get oppure un dict vuoto  -->
+  </ul>
+</div>
+</nav>
+
+<!-- FINE NAVBAR -->
+
+{% block content%}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -2,11 +2,11 @@
   
   
   {% block content %}
-  <!-- <div class="container-fluid mt-5">
+  <div class="container-fluid mt-5">
     <div class="row">
-      {% for nota in note %}
+      {% for nota in notes %}
         <div class="col-lg-6 col-xl-3 col-md-6 mb-4"> <!-- Three columns in a row -->
-          <!-- <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title">{{nota.nome}}</h5>
               <p class="card-text">{{nota.description }}</p>
@@ -16,11 +16,11 @@
             </div>
           </div>
         </div>
-        {% if forloop.counter|divisibleby:4 %} --> 
+        {% if forloop.counter|divisibleby:4 %}
         <!-- #forloop.counter è formito da django, conta il numero di iterazioni che stiamo eseguendo.Il count parte da 1
         #divisibleby, sempre fornito da django controlla fino a che le colonne sono divisibili per il numero che abbiamo indicato.
                       quando la condizione non è più vera termina il loop andando a capo -->
-          <!-- </div>
+          </div>
           <div class="row"> 
         {% endif %}
       {% endfor %}
@@ -32,4 +32,4 @@
   
   
 </body>
-</html> -->
+</html>
